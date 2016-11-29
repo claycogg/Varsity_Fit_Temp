@@ -4,16 +4,27 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
-  <!-- Dashboard Tab -->
-  <ion-tab title="Status" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/dash">
-    <ion-nav-view name="tab-dash"></ion-nav-view>
+  
+  <!-- Login Tab -->
+  <ion-tab title="Login" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/login">
+    <ion-nav-view name="tab-login"></ion-nav-view>
   </ion-tab>
 
-  <!-- Chats Tab -->
-  <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/chats">
-    <ion-nav-view name="tab-chats"></ion-nav-view>
+  <!-- Survey Tab -->
+  <ion-tab title="Survey" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/survey">
+    <ion-nav-view name="tab-survey"></ion-nav-view>
   </ion-tab>
+
+  <!-- Workout Tab -->
+  <ion-tab title="Workout" icon-off="ion-ios-body-outline" icon-on="ion-ios-body" href="#/tab/workout">
+    <ion-nav-view name="tab-workout"></ion-nav-view>
+  </ion-tab>
+  
+  <!-- References Tab -->
+  <ion-tab title="References" icon-off="ion-ios-folder-outline" icon-on="ion-ios-folder" href="#/tab/references">
+    <ion-nav-view name="tab-references"></ion-nav-view>
+  </ion-tab>
+  
 
   <!-- Account Tab -->
   <ion-tab title="Account" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
