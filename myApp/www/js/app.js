@@ -4,7 +4,6 @@
 // 'varsityfit' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'varsityfit.services' is found in services.js
-// 'varsityfit.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.services'])
 
 
@@ -28,6 +27,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 .config(function(BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
   
   var appName = 'varsityfit';
+  $httpProvider.interceptors.push(httpInterceptor);
   
   BackandProvider.setAppName('varsityfit'); // change here to your app name
   BackandProvider.setSignUpToken('4ce88904-75c5-412c-8365-df97d9e18a8f'); //token that enable sign up. see http://docs.backand.com/en/latest/apidocs/security/index.html#sign-up
@@ -36,8 +36,20 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+  
+    function httpInterceptor($q, $log, $cookieStore) {
+       return {
+         request: function(config) {
+           config.headers['Authorization'] = 
+             $cookieStore.get('backand_token');
+           return config;
+         }
+       };
+    }
+  
   $stateProvider
-
+  
+  
   // setup an abstract state for the tabs directive
   .state('tab', {
     url: '/tab',

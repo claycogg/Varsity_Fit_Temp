@@ -1,6 +1,12 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['backand', 'ngCookies'])
 
-.controller('LoginCtrl', function($scope) {})
+.controller('LoginCtrl', function($scope, Backand) {
+    var appName = 'varsityfit';
+    Backand.signin(email, password, appName).then(
+      function(data){}, function(error){});
+  
+  
+})
 
 .controller('SurveyCtrl', function($scope) {})
 
@@ -22,4 +28,24 @@ angular.module('starter.controllers', [])
 
 .controller('AccountCtrl', function($scope) {
 
-});
+})
+
+
+.controller('usersCtrl',    
+      function($scope, DatabaseService) {
+
+      $scope.playlists = [];
+
+      // read all playlists for a user
+      DatabaseService.readAll('playlists').then(
+        function9data){
+        $scope.playlists = data; 
+      });
+
+      // a click handler for selecting a playlist
+      $scope.clickPlaylist = function(id){
+                DatabaseService.readOne('playlists', id). 
+           then(function(data){});
+      });
+
+    });

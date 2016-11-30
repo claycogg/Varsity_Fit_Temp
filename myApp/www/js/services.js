@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['backand'])
 
     .service('APIInterceptor', function ($rootScope, $q) {
         var service = this;
@@ -61,4 +61,36 @@ angular.module('starter.services', [])
         service.signout = function () {
             return Backand.signout();
         };
+    })
+    
+    
+    .service('DatabaseService', function($http, Backand){    
+
+      var baseUrl = '/1/object/data/';
+
+      return {
+
+        // read all rows in the object
+          readAll: function(objectName) {  
+            return $http({
+              method: 'GET',
+              url: Backand.getApiUrl() + baseUrl + objectName
+           }).then(
+          function(response) {
+              return response.data.data;
+            });
+          },
+
+        // read one row with given id
+          readOne: function(objectName, id) {
+          return $http({
+            method: 'GET',
+            url: Backand.getApiUrl() + baseUrl + self.objectName 
+                + '/' + id
+          }).then(
+            function(response) {
+              return response.data;
+            });
+          }
+      };
     });
