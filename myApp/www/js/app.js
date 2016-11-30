@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
     }
   });
 })
@@ -91,6 +91,17 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
         }
       }
     })
+    
+  .state('referenceslinks', {
+      url: '/referenceslinks',
+      views: {
+        'tab-referenceslinks': {
+          templateUrl: 'templates/tab-referenceslinks.html',
+          controller: 'ReferencesLinksCtrl'
+        }
+      }
+    })
+    
     .state('tab.workout', {
       url: '/workout',
       views: {

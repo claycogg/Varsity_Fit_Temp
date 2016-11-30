@@ -72,7 +72,7 @@ angular.module('starter.controllers', [])
   }
   
   function initCreateForm() {
-    vm.newObject = { bodyWeight: '', hoursSleep: '', stressLevel: '', minsPlayed:'' }; 
+    vm.newObject = { bodyWeight: '', hoursSleep: '', stressLevel: '', minsPlayed:'', date: ''}; 
   }
   
   function setEdited(object) {
@@ -129,6 +129,26 @@ angular.module('starter.controllers', [])
 
 .controller('ReferencesCtrl', function($scope) {
 
+})
+
+.controller('ReferencesCtrl', function($scope, $state, formData) {
+  $scope.user = {};
+  
+  $scope.submitForm = function(user) {
+   if (user.firstName && user.lastName && user.comments) {
+     console.log("Submitting Form", user);
+     formData.updateForm(user);
+   console.log("Retrieving form from service", formData.getForm());
+   $state.go('page2');
+   } else {
+     alert("Please fill out some information for the user");
+   }
+ };
+
+})
+
+.controller('ReferencesLinksCtrl', function($scope) {
+  
 })
 
 .controller('AccountCtrl', function($scope) {

@@ -76,18 +76,21 @@
                 <span ng-click="vm.isCreating = true"><i class='icon ion-plus-round new-item'> Take Survey</i></span>
             </div>
             <div class="bar bar-subheader">
-                <div class="list card" ng-repeat="object in vm.data"
+                        <div class="col">Date</div>
+                        <div class="col">Body Weight</div>
+                        <div class="col">Hours Slept</div>
+                        <div class="col">Stress Level</div>
+                        <div class="col">Minutes Played</div>
+            </div>
+            <div>
+                <div class="list padding has-header card" ng-repeat="object in vm.data"
                      ng-class="{'active':vm.isCurrent(object.id)}">
-                    <div class="item item-icon-right item-icon-left">
-                        <i class="ion-compose icon" ng-click="vm.setEdited(object)"></i>
-                        <h2 class="text-center">{{object.hoursSleep}}</h2>
-                        <i class="icon ion-close-round" ng-click="vm.delete(object.id)"></i>
-                    </div>
-                    <div class="item item-body">
-                        {{object.bodyWeight}}
-                        {{object.hoursSleep}}
-                        {{object.stressLevel}}
-                        {{object.minsPlayed}}
+                    <div class="row">
+                        <div class="col">{{object.date}}</div>
+                        <div class="col">{{object.bodyWeight}}</div>
+                        <div class="col">{{object.hourSleep}}</div>
+                        <div class="col">{{object.stressLevel}}</div>
+                        <div class="col">{{object.minsPlayed}}</div>
                     </div>
                 </div>
             </div>
@@ -103,33 +106,63 @@
             <div>
                 <form class="create-form" role="form"
                       ng-submit="vm.create(vm.newObject)" novalidate>
-                    <div class="list">
+                    <div class="list has-header padding">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Date</span>
+                            <input type="date" class="form-control"
+                                ng-model="vm.newObject.date"
+                                placeholder="Date">
+                        </label>
+                        
+                        
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Body Weight</span>
                             <input type="number" class="form-control"
                                    ng-model="vm.newObject.bodyWeight"
                                    placeholder="Enter Weight (lbs.)">
                         </label>
-                        <label class="item item-input item-stacked-label">
+                        
+                        <label class="item item-input item-select">
                             <span class="input-label">Hours Slept</span>
-                            <input type="number" class="form-control"
-                                  ng-model="vm.newObject.hoursSleep"
-                                  placeholder="Enter Number of Hours Slept" min="1" max="12"></textarea>
+                            <select ng-model ="vm.newObject.hoursSleep">
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                                <option value=6>6</option>
+                                <option value=7>7</option>
+                                <option value=8>8</option>
+                                <option value=9>9</option>
+                                <option value=10>10</option>
+                            </select>
                         </label>
-                        <label class="item item-input item-stacked-label">
+                        
+                        <label class="item item-input item-select">
                             <span class="input-label">Stress Level</span>
-                            <input id="slider1" type="range" class="form-control"
-                                  ng-model="vm.newObject.stressLevel"
-                                  placeholder="Enter Stress Level (1-10)" min="1" max="10"></textarea>
+                            <select ng-model ="vm.newObject.stressLevel">
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                                <option value=6>6</option>
+                                <option value=7>7</option>
+                                <option value=8>8</option>
+                                <option value=9>9</option>
+                                <option value=10>10</option>
+                            </select>
                         </label>
+
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Minutes Played</span>
-                            <input type="text" class="form-control"
+                            <input type="number" class="form-control"
                                   ng-model="vm.newObject.minsPlayed"
-                                  placeholder="Enter Number of Minutes Played Last 48 hrs"></textarea>
+                                  placeholder="Mins in the last 48hrs">
                         </label>
                     </div>
-                    <button class="button button-block button-positive" type="submit">Create</button>
+                    <br></br>
+                    <button class="button button-block button-dark" type="submit">Create</button>
                 </form>
             </div>
         </ion-content>
