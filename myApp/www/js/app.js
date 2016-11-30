@@ -25,7 +25,8 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 
 
 .config(function(BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
-  
+
+/*  
   var appName = 'varsityfit';
   $httpProvider.interceptors.push(httpInterceptor);
   
@@ -46,7 +47,8 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
          }
        };
     }
-  
+*/
+
   $stateProvider
   
   
@@ -65,7 +67,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     views: {
       'tab-login': {
         templateUrl: 'templates/tab-login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginCtrl as login'
       }
     }
   })

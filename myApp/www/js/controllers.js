@@ -1,12 +1,41 @@
-angular.module('starter.controllers', ['backand', 'ngCookies'])
+angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, Backand) {
+.controller('LoginCtrl', function($rootScope, $state, LoginService, Backand) {
+    var login = this;
+    
+    function signin() {
+      LoginService.signin(login.email, login.password, login.appName)
+        .then (function() {
+          $rootScope.$broadcast("authorized");
+          
+          $state.go("tab.survey");
+          
+        }, function(error){
+          console.log(error)
+          
+        })
+    }
+
+    function signout() {
+      LoginService.signout()
+        .then (function() {
+          $state.go("tab.login");
+          
+        })
+    }
+    
+    login.signin = signin;
+    login.signout = signout;
+
+/*
     var appName = 'varsityfit';
     Backand.signin(email, password, appName).then(
       function(data){}, function(error){});
   
-  
+*/
+
 })
+
 
 .controller('SurveyCtrl', function($scope) {})
 
@@ -28,24 +57,4 @@ angular.module('starter.controllers', ['backand', 'ngCookies'])
 
 .controller('AccountCtrl', function($scope) {
 
-})
-
-
-.controller('usersCtrl',    
-      function($scope, DatabaseService) {
-
-      $scope.playlists = [];
-
-      // read all playlists for a user
-      DatabaseService.readAll('playlists').then(
-        function9data){
-        $scope.playlists = data; 
-      });
-
-      // a click handler for selecting a playlist
-      $scope.clickPlaylist = function(id){
-                DatabaseService.readOne('playlists', id). 
-           then(function(data){});
-      });
-
-    });
+});

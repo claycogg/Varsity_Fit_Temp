@@ -1,4 +1,4 @@
-angular.module('starter.services', ['backand'])
+angular.module('starter.services', [])
 
     .service('APIInterceptor', function ($rootScope, $q) {
         var service = this;
@@ -11,6 +11,7 @@ angular.module('starter.services', ['backand'])
         };
     })
 
+/*
     .service('SurveyModel', function ($http, Backand) {
         var service = this,
             baseUrl = '/1/users/',
@@ -45,52 +46,18 @@ angular.module('starter.services', ['backand'])
         };
     })
 
+*/
     .service('LoginService', function (Backand) {
         var service = this;
-
         service.signin = function (email, password, appName) {
             //call Backand for sign in
+            console.log("check 4");
+            Backand.setAppName(appName);
+            console.log("check 5");
             return Backand.signin(email, password);
         };
-
-        service.anonymousLogin= function(){
-            // don't have to do anything here,
-            // because we set app token att app.js
-        }
 
         service.signout = function () {
             return Backand.signout();
         };
-    })
-    
-    
-    .service('DatabaseService', function($http, Backand){    
-
-      var baseUrl = '/1/object/data/';
-
-      return {
-
-        // read all rows in the object
-          readAll: function(objectName) {  
-            return $http({
-              method: 'GET',
-              url: Backand.getApiUrl() + baseUrl + objectName
-           }).then(
-          function(response) {
-              return response.data.data;
-            });
-          },
-
-        // read one row with given id
-          readOne: function(objectName, id) {
-          return $http({
-            method: 'GET',
-            url: Backand.getApiUrl() + baseUrl + self.objectName 
-                + '/' + id
-          }).then(
-            function(response) {
-              return response.data;
-            });
-          }
-      };
     });
