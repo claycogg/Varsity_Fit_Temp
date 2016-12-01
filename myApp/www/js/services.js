@@ -59,8 +59,9 @@ angular.module('starter.services', [])
         service.signout = function () {
             return Backand.signout();
         };
-    })
+    });
     
+/*    
     .service('ReferenceService', function() {
         return {
             form: {},
@@ -71,4 +72,6 @@ angular.module('starter.services', [])
                 this.form = form;
             }
         }
-    });
+    })
+    
+*/

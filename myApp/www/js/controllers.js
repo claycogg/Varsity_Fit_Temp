@@ -3,7 +3,13 @@ angular.module('starter.controllers', [])
 .controller('LoginCtrl', function($rootScope, $state, LoginService, Backand) {
     var login = this;
     
+    function signup() {
+      
+      
+    }
+    
     function signin() {
+      var appName = 'varsityfit'
       LoginService.signin(login.email, login.password, login.appName)
         .then (function() {
           $rootScope.$broadcast("authorized");
@@ -27,15 +33,51 @@ angular.module('starter.controllers', [])
     login.signin = signin;
     login.signout = signout;
 
-/*
-    var appName = 'varsityfit';
-    Backand.signin(email, password, appName).then(
-      function(data){}, function(error){});
+    // var appName = 'varsityfit';
+    // Backand.signin(email, password, appName).then(
+    //  function(data){}, function(error){});
   
-*/
 
-})
+}) 
 
+/*.controller('LoginCtrl', function($rootScope, $state, UsersModel, Backand) {
+  var vm = this;
+  
+  
+  function initCreateForm() {
+    vm.newObject = { email: '', password: '', firstName: '', lastName:'', sport: ''}; 
+  }
+  function signup(object){
+    UsersModel.create(object)
+      .then(function (result) {
+        cancelCreate();
+      });
+  }
+  
+  function cancelCreate() {
+    initCreateForm();
+    vm.isCreating = false;
+  }
+  
+  function signin() {
+      var appName = 'varsityfit'
+      LoginService.signin(login.email, login.password, login.appName)
+        .then (function() {
+          $rootScope.$broadcast("authorized");
+          
+          $state.go("tab.survey");
+          
+        }, function(error){
+          console.log(error)
+          
+        })
+  }
+  
+        initCreateForm();
+        vm.signup = signup;
+        vm.isCreating = false;
+  
+}) */
 
 .controller('SurveyCtrl', function($rootScope, SurveysModel) {
   var vm = this;
@@ -69,6 +111,8 @@ angular.module('starter.controllers', [])
         cancelEditing();
         getAll();
       });
+      
+    
   }
   
   function initCreateForm() {
@@ -127,25 +171,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ReferencesCtrl', function($scope) {
+/*
+.controller('ReferencesCtrl', function($scope, $state, ReferenceService) {
+  $state.go('referenceslinks');
 
 })
 
-.controller('ReferencesCtrl', function($scope, $state, formData) {
-  $scope.user = {};
-  
-  $scope.submitForm = function(user) {
-   if (user.firstName && user.lastName && user.comments) {
-     console.log("Submitting Form", user);
-     formData.updateForm(user);
-   console.log("Retrieving form from service", formData.getForm());
-   $state.go('page2');
-   } else {
-     alert("Please fill out some information for the user");
-   }
- };
-
-})
+*/
 
 .controller('ReferencesLinksCtrl', function($scope) {
   

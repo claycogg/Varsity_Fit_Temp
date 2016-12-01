@@ -111,6 +111,16 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
         }
       }
     })
+    
+    .state('tab.workoutdetails', {
+      url: '/workoutdetails',
+      views: {
+        'tab-workoutdetails': {
+          templateUrl: 'templates/tab-workoutdetails.html',
+          controller: 'WorkoutDetailsCtrl'
+        }
+      }
+    })
 
   .state('tab.account', {
     url: '/account',
