@@ -72,12 +72,12 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     }
   })
 
-  .state('tab.survey', {
-    url: '/survey',
+  .state('tab.presurvey', {
+    url: '/presurvey',
     views: {
       'tab-survey': {
-        templateUrl: 'templates/tab-survey.html',
-        controller: 'SurveyCtrl as vm'
+        templateUrl: 'templates/tab-presurvey.html',
+        controller: 'PreSurveyCtrl as vm'
       }
     }
   })

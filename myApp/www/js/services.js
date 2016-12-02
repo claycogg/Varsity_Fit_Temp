@@ -12,10 +12,10 @@ angular.module('starter.services', [])
     })
 
 
-    .service('SurveysModel', function ($http, Backand) {
+    .service('PreSurveysModel', function ($http, Backand) {
         var service = this,
             baseUrl = '/1/objects/',
-            objectName = 'surveys/';
+            objectName = 'presurvey/';
 
         function getUrl() {
             return Backand.getApiUrl() + baseUrl + objectName;
@@ -36,23 +36,12 @@ angular.module('starter.services', [])
         service.create = function (object) {
             return $http.post(getUrl(), object);
         };
-
-        service.update = function (id, object) {
-            return $http.put(getUrlForId(id), object);
-        };
-
-        service.delete = function (id) {
-            return $http.delete(getUrlForId(id));
-        };
     })
 
     .service('LoginService', function (Backand) {
         var service = this;
         service.signin = function (email, password, appName) {
-            //call Backand for sign in
-            console.log("check 4");
             Backand.setAppName(appName);
-            console.log("check 5");
             return Backand.signin(email, password);
         };
 
