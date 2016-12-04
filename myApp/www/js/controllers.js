@@ -1,6 +1,7 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic'])
 
 .controller('LoginCtrl', function($rootScope, $state, LoginService, Backand) {
+    
     var login = this;
     
     function signin() {
@@ -20,13 +21,15 @@ angular.module('starter.controllers', [])
     function signout() {
       LoginService.signout()
         .then (function() {
-          $state.go("tab.login");
+          //$state.go("tab.login");
+          $state.go("login");
           
         })
     }
     
     login.signin = signin;
     login.signout = signout;
+    
 
 }) 
 

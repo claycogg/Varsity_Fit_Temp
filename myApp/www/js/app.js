@@ -51,17 +51,28 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 
   $stateProvider
   
-  
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl as login'
+  })
+
   // setup an abstract state for the tabs directive
   .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
-  
-
+/*
+ 
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html'
+    controller: 'LoginCtrl as login'
+  })
+*/
   // Each tab has its own nav history stack:
-
+/*
   .state('tab.login', {
     url: '/login',
     views: {
@@ -72,10 +83,14 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     }
   })
 
+*/
+
+
+
   .state('tab.presurvey', {
     url: '/presurvey',
     views: {
-      'tab-survey': {
+      'tab-presurvey': {
         templateUrl: 'templates/tab-presurvey.html',
         controller: 'PreSurveyCtrl as vm'
       }
@@ -133,7 +148,8 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/login');
+  //$urlRouterProvider.otherwise('/tab/login');
+  $urlRouterProvider.otherwise('/login');
 
   $httpProvider.interceptors.push('APIInterceptor');
     
@@ -143,7 +159,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 
         function unauthorized() {
             console.log("user is unauthorized, sending to login");
-            $state.go('tab.login');
+            $state.go('login');
         }
 
         function signout() {
@@ -155,10 +171,10 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
         });
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-            if (toState.name == 'tab.login') {
+            if (toState.name == 'login') {
                 signout();
             }
-            else if (toState.name != 'tab.login' && Backand.getToken() === undefined) {
+            else if (toState.name != 'login' && Backand.getToken() === undefined) {
                 unauthorized();
             }
         });
