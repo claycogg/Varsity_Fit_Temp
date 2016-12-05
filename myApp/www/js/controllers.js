@@ -9,7 +9,6 @@ angular.module('starter.controllers', ['ionic'])
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
           $rootScope.$broadcast("authorized");
-          $scope.getUserDetails();
           $state.go("tab.workout");
           
         }, function(error){
@@ -18,16 +17,6 @@ angular.module('starter.controllers', ['ionic'])
         })
     }
     
-   $scope.getUserDetails = function() {
-    var user = Backand.getUserDetails();
-    if(user.$$state.value !== null){
-      $scope.currentUser = user.$$state.value.userId;
-    }
-    else {
-      $scope.currentUser = null;
-    }
-  }
-
     function signout() {
       LoginService.signout()
         .then (function() {
@@ -122,14 +111,26 @@ angular.module('starter.controllers', ['ionic'])
 
 
 
-.controller('PostSurveyCtrl', function($rootScope, $state, PostSurveysModel) {
+.controller('PostSurveyCtrl', function($rootScope, $scope, Backand, $state, PostSurveysModel) {
   var vm = this;
+  var userDetail;
   
   function getAll(){
     PostSurveysModel.all()
       .then(function (result) {
         vm.data = result.data.data;
       });
+  }
+  
+  $scope.getUserDetails = function() {
+    var user = Backand.getUserDetails();
+    if(user.$$state.value !== null){
+      $scope.currentUser = user.$$state.value.userId;
+      userDetail = $scope.currentUser;
+    }
+    else {
+      $scope.currentUser = null;
+    }
   }
   
   function create(object){
@@ -142,7 +143,8 @@ angular.module('starter.controllers', ['ionic'])
       });
   }
   function initCreateForm() {
-    vm.newObject = { bodyWeightOut: '', practiceDifficulty: '', fatigueLevelPost: '', date: ''}; 
+    $scope.getUserDetails();
+    vm.newObject = { bodyWeightOut: '', practiceDifficulty: '', fatigueLevelPost: '', date: '', user: userDetail}; 
   }
   
   function setEdited(object) {
