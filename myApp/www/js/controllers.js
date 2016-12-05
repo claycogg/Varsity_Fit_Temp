@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic'])
 
-.controller('LoginCtrl', function($rootScope, $state, LoginService, Backand) {
+.controller('LoginCtrl', function($rootScope, $scope, $state, LoginService, Backand) {
     
     var login = this;
     
@@ -9,14 +9,24 @@ angular.module('starter.controllers', ['ionic'])
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
           $rootScope.$broadcast("authorized");
-          
-          $state.go("tab.presurvey");
+          $scope.getUserDetails();
+          $state.go("tab.workout");
           
         }, function(error){
           console.log(error)
           
         })
     }
+    
+   $scope.getUserDetails = function() {
+    var user = Backand.getUserDetails();
+    if(user.$$state.value !== null){
+      $scope.currentUser = user.$$state.value.userId;
+    }
+    else {
+      $scope.currentUser = null;
+    }
+  }
 
     function signout() {
       LoginService.signout()
@@ -34,8 +44,11 @@ angular.module('starter.controllers', ['ionic'])
 }) 
 
 
-.controller('PreSurveyCtrl', function($rootScope, $state, PreSurveysModel) {
+
+.controller('PreSurveyCtrl', function($rootScope, $scope, $state, PreSurveysModel, Backand) {
   var vm = this;
+  var userDetail;
+  
   
   function getAll(){
     PreSurveysModel.all()
@@ -44,17 +57,29 @@ angular.module('starter.controllers', ['ionic'])
       });
   }
   
+  $scope.getUserDetails = function() {
+    var user = Backand.getUserDetails();
+    if(user.$$state.value !== null){
+      $scope.currentUser = user.$$state.value.userId;
+      userDetail = $scope.currentUser;
+    }
+    else {
+      $scope.currentUser = null;
+    }
+  }
+  
   function create(object){
     PreSurveysModel.create(object)
       .then(function (result) {
         cancelCreate();
         getAll();
         
-        $state.go("tab.workout");
+        $state.go("tab.workoutdetails");
       });
   }
   function initCreateForm() {
-    vm.newObject = { bodyWeightIn: '', hoursSleep: '', sleepQuality: '', stressLevel: '', muscleSoreness: '', fatigueLevelPre: '', date: ''}; 
+    $scope.getUserDetails();
+    vm.newObject = { bodyWeightIn: '', hoursSleep: '', sleepQuality: '', stressLevel: '', muscleSoreness: '', fatigueLevelPre: '', date: '', user: userDetail}; 
   }
   
   function setEdited(object) {
@@ -95,17 +120,82 @@ angular.module('starter.controllers', ['ionic'])
   
 })
 
+
+
+.controller('PostSurveyCtrl', function($rootScope, $state, PostSurveysModel) {
+  var vm = this;
+  
+  function getAll(){
+    PostSurveysModel.all()
+      .then(function (result) {
+        vm.data = result.data.data;
+      });
+  }
+  
+  function create(object){
+    PostSurveysModel.create(object)
+      .then(function (result) {
+        cancelCreate();
+        getAll();
+        
+        $state.go("tab.workoutdetails");
+      });
+  }
+  function initCreateForm() {
+    vm.newObject = { bodyWeightOut: '', practiceDifficulty: '', fatigueLevelPost: '', date: ''}; 
+  }
+  
+  function setEdited(object) {
+    vm.edited = angular.copy(object);
+    vm.isEditing = true;
+  }
+  
+  function isCurrent(id) {
+    return vm.edited !== null && vm.edited.id === id;
+  }
+  
+  function cancelEditing() {
+    vm.edited = null;
+    vm.isEditing = false;
+  }
+  
+  function cancelCreate() {
+    initCreateForm();
+    vm.isCreating = false;
+  }
+  
+  vm.objects = [];
+  vm.edited = null;
+  vm.isEditing = false;
+  vm.isCreating = false;
+  vm.getAll = getAll;
+  vm.create = create;
+  vm.setEdited = setEdited;
+  vm.isCurrent = isCurrent;
+  vm.cancelEditing = cancelEditing;
+  vm.cancelCreate = cancelCreate;
+  $rootScope.$on("authorized", function() {
+    getAll();
+  });
+  
+  initCreateForm();
+  getAll();
+  
+})
+
+
+
+
 .controller('WorkoutCtrl', function($scope) {
 
 })
 
-/*
-.controller('ReferencesCtrl', function($scope, $state, ReferenceService) {
-  $state.go('referenceslinks');
+
+.controller('ReferencesCtrl', function($scope) {
+  //$state.go('referenceslinks');
 
 })
 
-*/
 
 .controller('ReferencesLinksCtrl', function($scope) {
   

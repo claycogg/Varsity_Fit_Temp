@@ -90,9 +90,19 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
   .state('tab.presurvey', {
     url: '/presurvey',
     views: {
-      'tab-presurvey': {
+      'tab-workout': {
         templateUrl: 'templates/tab-presurvey.html',
         controller: 'PreSurveyCtrl as vm'
+      }
+    }
+  })
+  
+  .state('tab.postsurvey', {
+    url: '/postsurvey',
+    views: {
+      'tab-workout': {
+        templateUrl: 'templates/tab-postsurvey.html',
+        controller: 'PostSurveyCtrl as vm'
       }
     }
   })
@@ -107,12 +117,12 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
       }
     })
     
-  .state('referenceslinks', {
+  .state('tab.referenceslinks', {
       url: '/referenceslinks',
       views: {
-        'tab-referenceslinks': {
+        'tab-references': {
           templateUrl: 'templates/tab-referenceslinks.html',
-          controller: 'ReferencesLinksCtrl'
+          controller: 'ReferencesCtrl'
         }
       }
     })
@@ -130,9 +140,9 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     .state('tab.workoutdetails', {
       url: '/workoutdetails',
       views: {
-        'tab-workoutdetails': {
+        'tab-workout': {
           templateUrl: 'templates/tab-workoutdetails.html',
-          controller: 'WorkoutDetailsCtrl'
+          controller: 'WorkoutCtrl'
         }
       }
     })

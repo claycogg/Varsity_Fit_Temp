@@ -1,5 +1,5 @@
 
-<ion-view view-title="Pre-Workout Survey">
+<ion-view view-title="Post-Workout Survey">
    <!-- <div ng-if="!vm.isCreating && !vm.isEditing">
         <ion-content class="padding has-header">
             <div class="bar bar-header">
@@ -18,7 +18,6 @@
             </div>
             
             <div>
-                <h1>HEY!</h1>
                 <form class="create-form" role="form"
                       ng-submit="vm.create(vm.newObject)" novalidate>
                     <div class="list has-header padding">
@@ -33,13 +32,13 @@
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Body Weight</span>
                             <input type="number" class="form-control"
-                                   ng-model="vm.newObject.bodyWeightIn"
+                                   ng-model="vm.newObject.bodyWeightOut"
                                    placeholder="Enter Weight (lbs.)">
                         </label>
                         
                         <label class="item item-input item-select">
-                            <span class="input-label">Hours Slept</span>
-                            <select ng-model ="vm.newObject.hoursSleep">
+                            <span class="input-label">Practice Difficulty</span>
+                            <select ng-model ="vm.newObject.practiceDifficulty">
                                 <option value=1>1</option>
                                 <option value=2>2</option>
                                 <option value=3>3</option>
@@ -55,8 +54,8 @@
                         
                         
                         <label class="item item-input item-select">
-                            <span class="input-label">Sleep Quality</span>
-                            <select ng-model ="vm.newObject.sleepQuality">
+                            <span class="input-label">Fatigue Level </span>
+                            <select ng-model ="vm.newObject.fatigueLevelPost">
                                 <option value=1>1</option>
                                 <option value=2>2</option>
                                 <option value=3>3</option>
@@ -65,38 +64,7 @@
                             </select>
                         </label>                        
                         
-                        <label class="item item-input item-select">
-                            <span class="input-label">Stress Level</span>
-                            <select ng-model ="vm.newObject.stressLevel">
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
-                        </label>
-
-                        <label class="item item-input item-select">
-                            <span class="input-label">Muscle Soreness</span>
-                            <select ng-model ="vm.newObject.muscleSoreness">
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
-                        </label>
                         
-                        <label class="item item-input item-select">
-                            <span class="input-label">Fatigue Level</span>
-                            <select ng-model ="vm.newObject.fatigueLevelPre">
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=4>4</option>
-                                <option value=5>5</option>
-                            </select>
-                        </label>
                     </div>
                     <br></br>
                     <button class="button button-block button-dark" type="submit">Submit</button>
