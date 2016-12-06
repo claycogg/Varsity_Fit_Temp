@@ -1,0 +1,27 @@
+
+<ion-view view-title="Surveys">
+    <div ng-controller="PreSurveyCtrl">
+                     <div class="bar bar-subheader">
+                 <div class="list card" ng-repeat="object in vm.data"
+                         <div class="col">Date</div>
+                         <div class="col">Body Weight</div>
+                         <div class="col">Hours Slept</div>
+                         <div class="col">Stress Level</div>
+                         <div class="col">Minutes Played</div>
+               </div>
+            <div class="bar bar-subheader">
+                <div class="list card" ng-repeat="object in vm.data"
+                     ng-class="{'active':vm.isCurrent(object.id)}">
+                    <div class="item item-icon-right item-icon-left">
+                        <h2 class="text-center">{{object.name}}</h2>
+                    </div>
+                    <div class="item item-body">
+                        {{object.description}}
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </div>
+
+
+</ion-view>

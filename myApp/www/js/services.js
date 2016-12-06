@@ -72,7 +72,20 @@ angular.module('starter.services', [])
         };
 
         service.signout = function () {
+            return Backand.signOut();
+        };
+        
+        
+    })
+    
+    .service('AccountService', function(Backand){
+        var service = this;
+
+        service.signout = function() {
             return Backand.signout();
         };
+        
+
+        
     });
     

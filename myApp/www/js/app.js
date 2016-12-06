@@ -56,6 +56,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl as login'
   })
+  
 
   // setup an abstract state for the tabs directive
   .state('tab', {
@@ -152,7 +153,36 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     views: {
       'tab-account': {
         templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+        controller: 'AccountCtrl as vm'
+      }
+    }
+  })  
+  .state('tab.accountdetails', {
+    url: '/accountdetails',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-accountdetails.html',
+        controller: 'AccountCtrl as vm'
+      }
+    }
+  })
+  
+  .state('tab.surveys', {
+    url: '/surveys', 
+    views: {
+      'tab-account': {
+          templateUrl: 'templates/tab-surveys.html',
+          controller: 'PreSurveyCtrl'  
+      }
+    }
+  })
+  
+  .state('tab.changepassword', {
+    url: '/changepassword', 
+    views: {
+      'tab-account': {
+          templateUrl: 'templates/tab-changepassword.html',
+          controller: 'AccountCtrl'  
       }
     }
   });
@@ -163,8 +193,9 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 
   $httpProvider.interceptors.push('APIInterceptor');
     
-})
+});
 
+/*
   .run(function ($rootScope, $state, LoginService, Backand) {
 
         function unauthorized() {
@@ -172,9 +203,9 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
             $state.go('login');
         }
 
-        function signout() {
-            LoginService.signout();
-        }
+      //  function signout() {
+        //    LoginService.signout();
+        //}
 
         $rootScope.$on('unauthorized', function () {
             unauthorized();
@@ -190,3 +221,4 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
         });
 
     })
+*/
