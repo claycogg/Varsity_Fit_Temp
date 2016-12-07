@@ -172,7 +172,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     views: {
       'tab-account': {
           templateUrl: 'templates/tab-surveys.html',
-          controller: 'PreSurveyCtrl'  
+          controller: 'AccountCtrl'  
       }
     }
   })

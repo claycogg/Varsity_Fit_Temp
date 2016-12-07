@@ -27,15 +27,8 @@ angular.module('starter.controllers', ['ionic'])
 .controller('PreSurveyCtrl', function($rootScope, $scope, $state, PreSurveysModel, Backand) {
   var vm = this;
   var userDetail;
-  
-  
-  function getAll(){
-    PreSurveysModel.all()
-      .then(function (result) {
-        vm.data = result.data.data;
-      });
-  }
-  
+  var data2 = [];
+
   $scope.getUserDetails = function() {
     var user = Backand.getUserDetails();
     if(user.$$state.value !== null){
@@ -45,7 +38,36 @@ angular.module('starter.controllers', ['ionic'])
     else {
       $scope.currentUser = null;
     }
+  };
+  
+
+
+
+  function getAll(){
+    PreSurveysModel.all()
+      .then(function (result) {
+            vm.allData = result.data.data;
+        //else {
+          
+        //}
+      });
   }
+  
+  function getSelected(){
+    PreSurveysModel.all()
+      .then(function (result) {
+        for (var object in vm.allData) {
+            var current = vm.allData[object];
+            if (userDetail == current.user) {
+              data2.push(vm.allData[object]);
+            }
+            
+        }
+        vm.data = data2;
+
+      });
+  }
+  
   
   function create(object){
     PreSurveysModel.create(object)
@@ -60,7 +82,6 @@ angular.module('starter.controllers', ['ionic'])
     $scope.getUserDetails();
     vm.newObject = { bodyWeightIn: '', hoursSleep: '', sleepQuality: '', stressLevel: '', muscleSoreness: '', fatigueLevelPre: '', date: '', user: userDetail}; 
   }
-  
   function setEdited(object) {
     vm.edited = angular.copy(object);
     vm.isEditing = true;
@@ -92,10 +113,12 @@ angular.module('starter.controllers', ['ionic'])
   vm.cancelCreate = cancelCreate;
   $rootScope.$on("authorized", function() {
     getAll();
+    getSelected();
   });
   
   initCreateForm();
   getAll();
+  getSelected();
   
 })
 
@@ -104,14 +127,9 @@ angular.module('starter.controllers', ['ionic'])
 .controller('PostSurveyCtrl', function($rootScope, $scope, Backand, $state, PostSurveysModel) {
   var vm = this;
   var userDetail;
+  var data2 = [];
   
-  function getAll(){
-    PostSurveysModel.all()
-      .then(function (result) {
-        vm.data = result.data.data;
-      });
-  }
-  
+
   $scope.getUserDetails = function() {
     var user = Backand.getUserDetails();
     if(user.$$state.value !== null){
@@ -121,7 +139,29 @@ angular.module('starter.controllers', ['ionic'])
     else {
       $scope.currentUser = null;
     }
+  };
+  function getAll(){
+    PostSurveysModel.all()
+      .then(function (result) {
+            vm.allData = result.data.data;
+      });
   }
+  
+  function getSelected(){
+    PostSurveysModel.all()
+      .then(function (result) {
+        for (var object in vm.allData) {
+            var current = vm.allData[object];
+            if (userDetail == current.user) {
+              data2.push(vm.allData[object]);
+            }
+            
+        }
+        vm.data = data2;
+
+      });
+  }
+  
   
   function create(object){
     PostSurveysModel.create(object)
@@ -168,11 +208,13 @@ angular.module('starter.controllers', ['ionic'])
   vm.cancelCreate = cancelCreate;
   $rootScope.$on("authorized", function() {
     getAll();
+    getSelected();
   });
+  
   
   initCreateForm();
   getAll();
-  
+  getSelected();
 })
 
 
@@ -199,7 +241,6 @@ angular.module('starter.controllers', ['ionic'])
   
   function userDetails() {
     var user = Backand.getUserDetails();
-    console.log(user);
     if(user.$$state.value !== null){
       $scope.currentUser = user.$$state.value.userId;
       vm.firstName = user.$$state.value.firstName;

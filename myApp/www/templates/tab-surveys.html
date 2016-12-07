@@ -1,27 +1,57 @@
 
 <ion-view view-title="Surveys">
-    <div ng-controller="PreSurveyCtrl">
-                     <div class="bar bar-subheader">
-                 <div class="list card" ng-repeat="object in vm.data"
-                         <div class="col">Date</div>
-                         <div class="col">Body Weight</div>
-                         <div class="col">Hours Slept</div>
-                         <div class="col">Stress Level</div>
-                         <div class="col">Minutes Played</div>
-               </div>
-            <div class="bar bar-subheader">
-                <div class="list card" ng-repeat="object in vm.data"
-                     ng-class="{'active':vm.isCurrent(object.id)}">
-                    <div class="item item-icon-right item-icon-left">
-                        <h2 class="text-center">{{object.name}}</h2>
-                    </div>
-                    <div class="item item-body">
-                        {{object.description}}
+    <ion-content class="padding has-header">
+        <div class="list">
+            <div class="item item-divider">
+                Your Pre Surveys
+            </div>
+                <div ng-controller="PreSurveyCtrl as vm">
+                    <div ng-if="!vm.isCreating && !vm.isEditing">
+                        <div class= "row header">
+                            <div class="col">Date</div>
+                            <div class="col">Body Weight In</div>
+                            <div class="col">Hours Slept</div>
+                            <div class="col">Stress Level</div>
+                            <div class="col">Muscle Soreness</div>
+                            <div class="col">Pre Fatigue Level</div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div class="has-header card" ng-repeat="object in vm.data"
+                            ng-class="{'active':vm.isCurrent(object.id)}">
+                            <div class="row">                         
+                                <div class="col">{{object.date}}</div>
+                                <div class="col">{{object.bodyWeightIn}}</div>
+                                <div class="col">{{object.hoursSleep}}</div>
+                                <div class="col">{{object.stressLevel}}</div>
+                                <div class="col">{{object.muscleSoreness}}</div>
+                                <div class="col">{{object.fatigueLevelPre}}</div>
+                            </div>   
+                        </div>
                     </div>
                 </div>
+            <div class="item item-divider">
+                Your Post Surveys
             </div>
-        </ion-content>
-    </div>
-
-
+                <div ng-controller="PostSurveyCtrl as vm">
+                    <div ng-if="!vm.isCreating && !vm.isEditing">                     
+                        <div class="row header">
+                            <div class="col">Date</div>
+                            <div class="col">Body Weight Out</div>
+                            <div class="col">Practice Difficulty</div>
+                            <div class="col">Post Fatigue Level</div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div class="has-header card" ng-repeat="object in vm.data"
+                            ng-class="{'active':vm.isCurrent(object.id)}">
+                            <div class="row">
+                                <div class="col">{{object.date}}</div>
+                                <div class="col">{{object.bodyWeightOut}}</div>
+                                <div class="col">{{object.practiceDifficulty}}</div>
+                                <div class="col">{{object.fatigueLevelPost}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </ion-content>
 </ion-view>
