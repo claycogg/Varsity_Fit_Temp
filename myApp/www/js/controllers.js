@@ -265,7 +265,7 @@ angular.module('starter.controllers', ['ionic'])
   $scope.signout = function () {
     return Backand.signout()
       .then(function (response) {
-        $scope.getUserDetails();
+        userDetails();
         $state.go('login');
         return response;
 
