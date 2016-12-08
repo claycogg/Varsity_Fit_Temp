@@ -57,6 +57,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     controller: 'LoginCtrl as login'
   })
   
+
   .state('requestResetPassword', {
     url: '/requestResetPassword',
     templateUrl: 'templates/requestResetPassword.html',
@@ -75,29 +76,6 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
-/*
- 
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html'
-    controller: 'LoginCtrl as login'
-  })
-*/
-  // Each tab has its own nav history stack:
-/*
-  .state('tab.login', {
-    url: '/login',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/tab-login.html',
-        controller: 'LoginCtrl as login'
-      }
-    }
-  })
-
-*/
-
-
 
   .state('tab.presurvey', {
     url: '/presurvey',
