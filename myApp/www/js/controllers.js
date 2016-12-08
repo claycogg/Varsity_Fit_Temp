@@ -3,8 +3,9 @@ angular.module('starter.controllers', ['ionic'])
 .controller('LoginCtrl', function($rootScope, $scope, $state, LoginService, Backand) {
     
     var login = this;
-    var appName = 'varsityfit';
     var token;
+    var appName = 'varsityfit';
+    // var newPassword2;
     
     function signin() {
       LoginService.signin(login.email, login.password, appName)
@@ -45,6 +46,19 @@ angular.module('starter.controllers', ['ionic'])
     
     login.resetPassword = resetPassword;
 
+    function changePassword() {
+      if (login.newPassword == login.newPassword2) {
+        LoginService.changePassword(login.oldPassword, login.newPassword)
+          .then(function() {
+            $rootScope.$broadcast("successful");
+            $state.go("tab.account");
+          }, function(error) {
+            console.log(error);
+          });
+      }
+    }
+    
+    login.changePassword = changePassword;
 
 }) 
 

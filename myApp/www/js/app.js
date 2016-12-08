@@ -193,7 +193,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     views: {
       'tab-account': {
           templateUrl: 'templates/tab-changepassword.html',
-          controller: 'AccountCtrl'  
+          controller: 'LoginCtrl as login'  
       }
     }
   });

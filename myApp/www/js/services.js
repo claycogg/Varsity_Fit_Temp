@@ -99,8 +99,18 @@ angular.module('starter.services', [])
         };        
         
         
-    })
-    
+      service.changePassword = function (oldPassword, newPassword) {
+          return $http({
+              method: 'POST',
+              url : Backand.getApiUrl() + '/1/user/changePassword',
+              data: 
+                {
+                  "oldPassword": oldPassword,
+                  "newPassword": newPassword
+                }
+          })
+      };
+    })        
     .service('AccountService', function(Backand){
         var service = this;
 
