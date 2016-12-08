@@ -64,7 +64,7 @@ angular.module('starter.services', [])
         };
     })
 
-    .service('LoginService', function (Backand) {
+    .service('LoginService', function (Backand, $http) {
         var service = this;
         service.signin = function (email, password, appName) {
             Backand.setAppName(appName);
@@ -74,6 +74,29 @@ angular.module('starter.services', [])
         service.signout = function () {
             return Backand.signOut();
         };
+        
+      service.resetPassword = function (resetToken, newPassword) {
+          return $http({
+              method: 'POST',
+              url : Backand.getApiUrl() + '/1/user/resetPassword',
+              data: 
+                {
+                  "resetToken": resetToken,
+                  "newPassword": newPassword
+                }
+          });
+      };
+            service.requestResetPassword = function (userName) {
+             return $http({
+                  method: 'POST',
+                  url : Backand.getApiUrl() + '/1/user/requestResetPassword',
+                  data: 
+                    {
+                      "appName": 'varsityfit',
+                      "username": userName
+                    }
+            });
+        };        
         
         
     })
@@ -85,7 +108,7 @@ angular.module('starter.services', [])
             return Backand.signout();
         };
         
-
         
+
     });
     

@@ -20,3 +20,8 @@
 .item-icon-left .icon, .item-icon-right .icon {
 	font-size: 22px;
 }
+
+.right {
+    text-align: right;
+    float: right;
+}

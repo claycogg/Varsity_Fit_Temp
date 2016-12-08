@@ -3,21 +3,47 @@ angular.module('starter.controllers', ['ionic'])
 .controller('LoginCtrl', function($rootScope, $scope, $state, LoginService, Backand) {
     
     var login = this;
+    var appName = 'varsityfit';
+    var token;
     
     function signin() {
-      var appName = 'varsityfit'
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
           $rootScope.$broadcast("authorized");
           $state.go("tab.workout");
           
         }, function(error){
-          console.log(error)
+          console.log(error);
           
-        })
+        });
     }
 
     login.signin = signin;
+    
+    function requestResetPassword() {
+      LoginService.requestResetPassword(login.userName)
+        .then(function() {
+          token = Backand.getToken();
+          $rootScope.$broadcast("successful");
+          $state.go("resetPassword");
+        }, function(error){
+          console.log(error);
+        });
+    }
+    login.requestResetPassword = requestResetPassword;
+    
+    function resetPassword() {
+      LoginService.resetPassword(login.resetToken, login.newPassword)
+        .then (function() {
+          $rootScope.$broadcast("authorized");
+          alert('Your password was successfully changed');
+          $state.go("login");
+        }, function(error) {
+          console.log(error);
+        });
+    }
+    
+    login.resetPassword = resetPassword;
 
 
 }) 
@@ -256,10 +282,7 @@ angular.module('starter.controllers', ['ionic'])
   userDetails();
   
   
-  function changePassword() {
-    
-  };
-  
+
 
   
   $scope.signout = function () {
@@ -273,6 +296,3 @@ angular.module('starter.controllers', ['ionic'])
   };
 
 });
-
-
-

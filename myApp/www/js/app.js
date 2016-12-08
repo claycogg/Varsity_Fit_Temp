@@ -57,7 +57,18 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     controller: 'LoginCtrl as login'
   })
   
-
+  .state('requestResetPassword', {
+    url: '/requestResetPassword',
+    templateUrl: 'templates/requestResetPassword.html',
+    controller: 'LoginCtrl as login'
+  })
+  
+  .state('resetPassword', {
+    url: '/resetPassword',
+    templateUrl: 'templates/resetPassword.html',
+    controller: 'LoginCtrl as login'
+  })
+  
   // setup an abstract state for the tabs directive
   .state('tab', {
     url: '/tab',
@@ -172,7 +183,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
     views: {
       'tab-account': {
           templateUrl: 'templates/tab-surveys.html',
-          controller: 'AccountCtrl'  
+          controller: 'PreSurveyCtrl'  
       }
     }
   })
