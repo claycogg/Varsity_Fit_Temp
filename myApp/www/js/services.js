@@ -63,6 +63,86 @@ angular.module('starter.services', [])
             return $http.post(getUrl(), object);
         };
     })
+    
+    
+    .service('WorkoutModel', function ($http, Backand) {
+        var service = this,
+            baseUrl = '/1/objects/',
+            objectName = 'workouts/';
+
+        function getUrl() {
+            return Backand.getApiUrl() + baseUrl + objectName;
+        }
+
+        function getUrlForId(id) {
+            return getUrl() + id;
+        }
+
+        service.all = function () {
+            return $http.get(getUrl());
+        };
+
+        service.fetch = function (id) {
+            return $http.get(getUrlForId(id));
+        };
+
+        service.create = function (object) {
+            return $http.post(getUrl(), object);
+        };
+    })
+
+
+    .service('UsersSportsModel', function ($http, Backand) {
+        var service = this,
+            baseUrl = '/1/objects/',
+            objectName = 'users_sports/';
+
+        function getUrl() {
+            return Backand.getApiUrl() + baseUrl + objectName;
+        }
+
+        function getUrlForId(id) {
+            return getUrl() + id;
+        }
+
+        service.all = function () {
+            return $http.get(getUrl());
+        };
+
+        service.fetch = function (id) {
+            return $http.get(getUrlForId(id));
+        };
+
+        service.create = function (object) {
+            return $http.post(getUrl(), object);
+        };
+    })  
+
+    .service('SportsWorkoutsModel', function ($http, Backand) {
+        var service = this,
+            baseUrl = '/1/objects/',
+            objectName = 'sports_workouts/';
+
+        function getUrl() {
+            return Backand.getApiUrl() + baseUrl + objectName;
+        }
+
+        function getUrlForId(id) {
+            return getUrl() + id;
+        }
+
+        service.all = function () {
+            return $http.get(getUrl());
+        };
+
+        service.fetch = function (id) {
+            return $http.get(getUrlForId(id));
+        };
+
+        service.create = function (object) {
+            return $http.post(getUrl(), object);
+        };
+    })
 
     .service('LoginService', function (Backand, $http) {
         var service = this;
@@ -99,7 +179,7 @@ angular.module('starter.services', [])
         };        
         
         
-      service.changePassword = function (oldPassword, newPassword) {
+    service.changePassword = function (oldPassword, newPassword) {
           return $http({
               method: 'POST',
               url : Backand.getApiUrl() + '/1/user/changePassword',
