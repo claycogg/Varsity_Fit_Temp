@@ -62,8 +62,6 @@ angular.module('starter.controllers', ['ionic'])
 
 }) 
 
-
-
 .controller('PreSurveyCtrl', function($rootScope, $scope, $state, PreSurveysModel, Backand) {
   var vm = this;
   var userDetail;
@@ -162,8 +160,6 @@ angular.module('starter.controllers', ['ionic'])
   
 })
 
-
-
 .controller('PostSurveyCtrl', function($rootScope, $scope, Backand, $state, PostSurveysModel) {
   var vm = this;
   var userDetail;
@@ -258,14 +254,155 @@ angular.module('starter.controllers', ['ionic'])
 })
 
 
+.controller('ExerciseCtrl', function($scope, $rootScope, Backand, $state, WorkoutsExercisesModel, ExerciseModel, CompletedModel, formData, exerciseData) {
+  var ec = this;
+  var userDetail;
+  
+  
+  
+  $scope.workout = formData.getForm();
+  var workout_id = $scope.workout.id;
+  var exercise_ids = $scope.workout.exercises;
+  var exercise_names = [];
+  
+  
+  
+  $scope.exercise = {};
+  $scope.exerciseInfo = exerciseData.getExercise();
+ // console.log($scope.exerciseInfo);
+  var exercise_id = $scope.exerciseInfo.id;
+  
+  
+  $scope.submitExercise = function(exercise) {
+    exerciseData.updateExercise(exercise);
+    console.log("Retrieving form from service", exerciseData.getExercise());
+    $state.go('tab.exercisedetails');
+    
+  };
+  
+  $scope.getUserDetails = function() {
+    var user = Backand.getUserDetails();
+    if(user.$$state.value !== null){
+      $scope.currentUser = user.$$state.value.userId;
+      userDetail = $scope.currentUser;
+    }
+    else {
+      $scope.currentUser = null;
+    }
+  };
+  
 
 
-.controller('WorkoutCtrl', function($scope, $rootScope, Backand, $state, UsersSportsModel, SportsWorkoutsModel, WorkoutModel) {
+  function getAll(){
+    ExerciseModel.all()
+      .then(function (result) {
+            ec.data = result.data.data;
+            
+      });
+  
+  }
+
+   $scope.getExerciseName = function() {
+     ExerciseModel.all()
+       .then(function (result) {
+         ec.exercise_names = result.data.data;
+         for(var object in ec.exercise_names) {
+           var current = ec.exercise_names[object];
+           var exercise_id = current.id;
+             for(var exercise in exercise_ids) {
+              if(exercise_id == exercise_ids[exercise]) {
+                exercise_names.push(ec.exercise_names[object]);
+              }
+            }
+        }
+        ec.exercises = exercise_names;
+      });
+  };
+
+
+
+  function create(object){
+    CompletedModel.create(object)
+      .then(function (result) {
+        cancelCreate();
+        
+        $state.go("tab.workoutdetails");
+      });
+  }
+  
+  function initCreateForm() {
+    $scope.getUserDetails();
+    console.log("WORKOUT " + workout_id);
+    console.log("EXERCISE " + exercise_id);
+    console.log("USER " + userDetail);
+    ec.newObject = {workout: workout_id, user: userDetail, exercise: exercise_id, weight: ''}; 
+  }
+  
+  function setEdited(object) {
+    ec.edited = angular.copy(object);
+    ec.isEditing = true;
+  }
+  
+  function isCurrent(id) {
+    return ec.edited !== null && ec.edited.id === id;
+  }
+  
+  function cancelEditing() {
+    ec.edited = null;
+    ec.isEditing = false;
+  }
+  
+  function cancelCreate() {
+    initCreateForm();
+    ec.isCreating = false;
+  }
+  
+  ec.objects = [];
+  ec.edited = null;
+  ec.isEditing = false;
+  ec.isCreating = false;
+  ec.getAll = getAll;
+  ec.create = create;
+  ec.setEdited = setEdited;
+  ec.isCurrent = isCurrent;
+  ec.cancelEditing = cancelEditing;
+  ec.cancelCreate = cancelCreate;
+  $rootScope.$on("authorized", function() {
+    getAll();
+  });
+  
+  initCreateForm();
+  getAll();
+  // $scope.getExerciseDetails();
+  $scope.getExerciseName();
+    
+
+
+})
+
+.controller('WorkoutCtrl', function($scope, $rootScope, Backand, $state, UsersSportsModel, SportsWorkoutsModel, WorkoutModel, WorkoutsExercisesModel, formData) {
   var wo = this;
   var userDetail;
   var sportDetail = [];
-  
+  var workoutDetail = [];
+  //var exerciseDetail = [];
+  var workout_names = [];
+  //var exercise_names = [];
   var data2 = [];
+
+
+  $scope.workout = {};
+  
+  
+  $scope.submitForm = function(workout) {
+    formData.updateForm(workout);
+    console.log("Retrieving form from service", formData.getForm());
+    $state.go('tab.workoutdetails');
+    
+  };
+
+
+
 
   $scope.getUserDetails = function() {
     var user = Backand.getUserDetails();
@@ -273,7 +410,6 @@ angular.module('starter.controllers', ['ionic'])
       user.$$state.value;
       $scope.currentUser = user.$$state.value.userId;
       userDetail = $scope.currentUser;
-      $scope.getSportDetails();
     }
     else {
       $scope.currentUser = null;
@@ -286,26 +422,52 @@ angular.module('starter.controllers', ['ionic'])
     UsersSportsModel.all()
       .then(function (result) {
             wo.sports = result.data.data;
-            console.log(wo.sports);
             for (var object in wo.sports) {
               var current = wo.sports[object];
               var user_sport = current.user;
               if(userDetail == user_sport) {
                 sportDetail.push(wo.sports[object]);
               }
-              //if ($scope.currentUser == object.user)
             }
-            console.log(sportDetail);
-            
+          wo.sports = sportDetail;
       });
   
   };
   
   $scope.getWorkoutDetails = function() {
-    
-    
-  }
-
+    SportsWorkoutsModel.all()
+      .then(function (result) {
+          wo.workouts = result.data.data;
+          //console.log(wo.workouts);
+          for (var object in wo.workouts) {
+            //console.log("test");
+            var current = wo.workouts[object];
+            var sport_workout = current.sport;
+            for (var sport in sportDetail) {
+              if(sport_workout == sportDetail[sport].sport) {
+                workoutDetail.push(wo.workouts[object]);
+              } 
+            }
+          }
+      });
+  };
+  
+  $scope.getWorkoutName = function() {
+    WorkoutModel.all()
+      .then(function (result) {
+        wo.workout_names = result.data.data;
+        for(var object in wo.workout_names) {
+          var current = wo.workout_names[object];
+          var workout_id = current.id;
+            for(var workout in workoutDetail) {
+              if(workout_id == workoutDetail[workout].id) {
+                workout_names.push(wo.workout_names[object]);
+              }
+            }
+        }
+        wo.workouts = workout_names;
+       });
+  };
 
 
 
@@ -313,10 +475,6 @@ angular.module('starter.controllers', ['ionic'])
     WorkoutModel.all()
       .then(function (result) {
             wo.allData = result.data.data;
-            //console.log(wo.allData);
-        //else {
-          
-        //}
       });
   }
   
@@ -331,7 +489,6 @@ angular.module('starter.controllers', ['ionic'])
             
         }
         wo.data = data2;
-        //console.log(wo.data);
       });
   }
   
@@ -342,11 +499,9 @@ angular.module('starter.controllers', ['ionic'])
         cancelCreate();
         getAll();
         
-        //$state.go("tab.workoutdetails");
       });
   }
   function initCreateForm() {
-    $scope.getUserDetails();
     wo.newObject = { name: ''}; 
   }
   function setEdited(object) {
@@ -386,7 +541,11 @@ angular.module('starter.controllers', ['ionic'])
   initCreateForm();
   getAll();
   getSelected();
-  
+  $scope.getUserDetails();
+  $scope.getSportDetails();
+  $scope.getWorkoutDetails();
+  $scope.getWorkoutName();
+
 })
 
 

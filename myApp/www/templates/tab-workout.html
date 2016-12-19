@@ -1,35 +1,30 @@
 <ion-view view-title="Workouts">
   <ion-content>
-    <div class="bar bar-header item-input-inset">
-      <label class="item-input-wrapper">
-        <i class="icon ion-ios-search placeholder-icon"></i>
-        <input type="search" placeholder="Search">
-      </label>
-      <button class="button button-clear">
-        Cancel
-       </button>
-  </div>
-  <div class="list card">
-
-  <a href="#/tab/workoutdetails" class="item item-icon-left">
-    <i class="icon ion-ios-pulse"></i>
-    Day 1
-  </a>
-
-  <a href="#/tab/workoutdetails" class="item item-icon-left">
-    <i class="icon ion-ios-pulse"></i>
-    Day 2
-  </a>
-
-  <a href="#/tab/workoutdetails" class="item item-icon-left">
-    <i class="icon ion-ios-pulse"></i>
-    Day 3
-  </a>
-
-</div>
-
-
+  <!--  <div class="bar bar-header item-input-inset">-->
+  <!--    <label class="item-input-wrapper">-->
+  <!--      <i class="icon ion-ios-search placeholder-icon"></i>-->
+  <!--      <input type="search" placeholder="Search">-->
+  <!--    </label>-->
+  <!--    <button class="button button-clear">-->
+  <!--      Cancel-->
+  <!--     </button>-->
+  <!--</div>-->
+  
+  
+  
+  <div>
+    <div ng-controller="WorkoutCtrl as wo">
+      <div ng-if="!wo.isCreating && !wo.isEditing">
+        <!--<form ng-submit="submitForm(sport)">-->
+          <ion-list>
+            <ion-item ng-repeat="workout in wo.workouts | orderBy: 'name'"  ng-model="workout.name" ng-click="submitForm(workout)">
+              {{ workout.name }}
+            </ionitem> 
+          </ion-list>
+        <!--</form>  -->
       </div>
-    </ion-list>
+    </div>
+  </div>
   </ion-content>
 </ion-view>
+

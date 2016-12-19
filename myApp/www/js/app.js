@@ -122,7 +122,7 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
       views: {
         'tab-workout': {
           templateUrl: 'templates/tab-workout.html',
-          controller: 'WorkoutCtrl'
+          controller: 'WorkoutCtrl as wo'
         }
       }
     })
@@ -132,10 +132,20 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
       views: {
         'tab-workout': {
           templateUrl: 'templates/tab-workoutdetails.html',
-          controller: 'WorkoutCtrl'
+          controller: 'ExerciseCtrl as ec'
         }
       }
     })
+    
+    .state('tab.exercisedetails', {
+      url: '/exercisedetails',
+      views: {
+        'tab-workout': {
+          templateUrl: 'templates/tab-exercisedetails.html',
+          controller: 'ExerciseCtrl as ec'
+        }
+      }
+    })    
 
   .state('tab.account', {
     url: '/account',

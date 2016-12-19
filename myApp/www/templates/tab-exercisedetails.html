@@ -1,0 +1,47 @@
+<ion-view view-title="{{exerciseInfo.name}}">
+  
+  <ion-content>
+    <ion-list>
+      <div class="list">
+        
+          <div ng-controller="ExerciseCtrl as ec">
+            
+        <div class="item item-divider">
+          Sets
+        </div>
+        <a class="item">
+          {{exerciseInfo.sets}}
+        </a>
+
+        <div class="item item-divider">
+          Reps
+        </div>
+        <a class="item">
+          {{exerciseInfo.reps}}
+        </a>
+
+        <div class="item item-divider">
+          Weight
+        </div>
+        
+
+        <div>
+          <form class="create-form" role="form"
+              ng-submit="ec.create(ec.newObject)" novalidate>
+                        <label class="item item-input item-stacked-label">
+                            <input type="number" class="form-control"
+                                   ng-model="ec.newObject.weight"
+                                   placeholder="Enter Weight">
+                        </label>
+                        
+                    <br></br>
+                    <button class="button button-block button-dark" type="submit">Submit</button>
+                </form>
+            </div>
+
+
+        
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

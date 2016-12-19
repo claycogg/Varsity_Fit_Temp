@@ -23,26 +23,27 @@
         <div class="item item-divider">
           Lift
         </div>
+        <!--
+        <div ng-controller="ExerCtrl as wo">
+          <div ng-if="!wo.isCreating && !wo.isEditing">
+            <ion-checkbox ng-repeat="exercise in wo.exercises" ng-checked="exersice.checked">
+                  {{ exercise.name}}
 
-        <a class="item">
-          1a. DB Walking Lunge
-        </a>
-
-        <a class="item">
-          1b. BB Front Squat
-        </a>
-
-        <a class="item">
-          2a. BB Back Squat
-        </a>
-
-        <a class="item">
-          2b. MB Scoop Toss for Height
-        </a>
-
-        <a class="item">
-          3a. DB/KB Goblet Squat
-        </a>
+            </ion-checkbox>
+        </div>
+        -->
+        
+          <div ng-controller="ExerciseCtrl as ec">
+            <div ng-if="!ec.isCreating && !ec.isEditing">
+              <!--<form ng-submit="submitForm(sport)">-->
+                <ion-list>
+                  <ion-item ng-repeat="exercise in ec.exercises | orderBy: 'name'"  ng-model="exercise.name" ng-click="submitExercise(exercise)">
+                    {{ exercise.name }}
+                  </ionitem> 
+                </ion-list>
+              <!--</form>  -->
+            </div>
+          </div>        
 
         <div class="item item-divider">
           Post Workout
