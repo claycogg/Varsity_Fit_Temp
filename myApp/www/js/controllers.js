@@ -418,6 +418,10 @@ angular.module('starter.controllers', ['ionic'])
     else {
       $scope.currentUser = null;
     }
+    var p = Promise.resolve(userDetail);
+          p.then(function() {
+          $scope.getSportDetails();
+          });
   };
   
   
@@ -425,12 +429,12 @@ angular.module('starter.controllers', ['ionic'])
   $scope.getSportDetails = function(){
     UsersSportsModel.all()
       .then(function (result) {
-            wo.sports = result.data.data;
-            for (var object in wo.sports) {
-              var current = wo.sports[object];
+            var sports_temp = result.data.data;
+            for (var object in sports_temp) {
+              var current = sports_temp[object];
               var user_sport = current.user;
               if(userDetail == user_sport) {
-                sportDetail.push(wo.sports[object]);
+                sportDetail.push(sports_temp[object]);
               }
             }
           wo.sports = sportDetail;
@@ -455,6 +459,10 @@ angular.module('starter.controllers', ['ionic'])
               } 
             }
           }
+          var p = Promise.resolve(workoutDetail);
+          p.then(function() {
+          $scope.getWorkoutName();
+          });
       });
   };
   
@@ -548,9 +556,9 @@ angular.module('starter.controllers', ['ionic'])
   getAll();
   getSelected();
   $scope.getUserDetails();
-  $scope.getSportDetails();
+  //$scope.getSportDetails();
   //$scope.getWorkoutDetails();
-  $scope.getWorkoutName();
+  //$scope.getWorkoutName();
 
 })
 
