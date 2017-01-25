@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic'])
 
-.controller('LoginCtrl', function($rootScope, $scope, $state, LoginService, Backand) {
+.controller('LoginCtrl', function($rootScope, $scope, $state, $ionicPopup, LoginService, Backand) {
     
     var login = this;
     var token;
@@ -14,6 +14,10 @@ angular.module('starter.controllers', ['ionic'])
           $state.go("tab.workout");
           
         }, function(error){
+          $ionicPopup.alert({
+                title: 'Login failed!',
+                template: 'Please check Username/Password!'
+            });
           console.log(error);
           
         });
@@ -430,6 +434,10 @@ angular.module('starter.controllers', ['ionic'])
               }
             }
           wo.sports = sportDetail;
+          var p = Promise.resolve(wo.sports);
+          p.then(function() {
+          $scope.getWorkoutDetails();
+          });
       });
   
   };
@@ -438,9 +446,7 @@ angular.module('starter.controllers', ['ionic'])
     SportsWorkoutsModel.all()
       .then(function (result) {
           wo.workouts = result.data.data;
-          //console.log(wo.workouts);
           for (var object in wo.workouts) {
-            //console.log("test");
             var current = wo.workouts[object];
             var sport_workout = current.sport;
             for (var sport in sportDetail) {
@@ -453,20 +459,20 @@ angular.module('starter.controllers', ['ionic'])
   };
   
   $scope.getWorkoutName = function() {
-    WorkoutModel.all()
-      .then(function (result) {
-        wo.workout_names = result.data.data;
-        for(var object in wo.workout_names) {
-          var current = wo.workout_names[object];
-          var workout_id = current.id;
-            for(var workout in workoutDetail) {
-              if(workout_id == workoutDetail[workout].id) {
-                workout_names.push(wo.workout_names[object]);
+      WorkoutModel.all()
+        .then(function (result) {
+          wo.workout_names = result.data.data;
+          for(var object in wo.workout_names) {
+            var current = wo.workout_names[object];
+            var workout_id = current.id;
+              for(var workout in workoutDetail) {
+                if(workout_id == workoutDetail[workout].workout) {
+                  workout_names.push(wo.workout_names[object]);
+                }
               }
-            }
-        }
-        wo.workouts = workout_names;
-       });
+          }
+          wo.workouts = workout_names;
+        });
   };
 
 
@@ -543,7 +549,7 @@ angular.module('starter.controllers', ['ionic'])
   getSelected();
   $scope.getUserDetails();
   $scope.getSportDetails();
-  $scope.getWorkoutDetails();
+  //$scope.getWorkoutDetails();
   $scope.getWorkoutName();
 
 })

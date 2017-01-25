@@ -167,31 +167,31 @@ angular.module('starter.services', [])
         };
     })
     
-    .service('WorkoutModel', function ($http, Backand) {
-        var service = this,
-            baseUrl = '/1/objects/',
-            objectName = 'workouts/';
+    // .service('WorkoutModel', function ($http, Backand) {
+    //     var service = this,
+    //         baseUrl = '/1/objects/',
+    //         objectName = 'workouts/';
 
-        function getUrl() {
-            return Backand.getApiUrl() + baseUrl + objectName;
-        }
+    //     function getUrl() {
+    //         return Backand.getApiUrl() + baseUrl + objectName;
+    //     }
 
-        function getUrlForId(id) {
-            return getUrl() + id;
-        }
+    //     function getUrlForId(id) {
+    //         return getUrl() + id;
+    //     }
 
-        service.all = function () {
-            return $http.get(getUrl());
-        };
+    //     service.all = function () {
+    //         return $http.get(getUrl());
+    //     };
 
-        service.fetch = function (id) {
-            return $http.get(getUrlForId(id));
-        };
+    //     service.fetch = function (id) {
+    //         return $http.get(getUrlForId(id));
+    //     };
 
-        service.create = function (object) {
-            return $http.post(getUrl(), object);
-        };
-    })    
+    //     service.create = function (object) {
+    //         return $http.post(getUrl(), object);
+    //     };
+    // })    
 
     .service('ExerciseModel', function ($http, Backand) {
         var service = this,
@@ -319,7 +319,6 @@ angular.module('starter.services', [])
       };
     })   
 
-    
     .service('AccountService', function(Backand){
         var service = this;
 
