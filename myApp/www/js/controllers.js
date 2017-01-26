@@ -14,6 +14,7 @@ angular.module('starter.controllers', ['ionic'])
       // });
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
+          console.log("attempted to login");
           $rootScope.$broadcast("authorized");
           $state.go("tab.workout");
           
