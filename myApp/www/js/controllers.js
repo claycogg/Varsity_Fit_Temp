@@ -17,12 +17,11 @@ angular.module('starter.controllers', ['ionic'])
           $state.go("tab.workout");
           
         }, function(error){
-          $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check Username/Password!'
-            });
+          // $ionicPopup.alert({
+          //       title: 'Login failed!',
+          //       template: 'Please check Username/Password!'
+          //   });
           console.log(error);
-          
         });
     }
 
