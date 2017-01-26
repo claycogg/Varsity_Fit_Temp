@@ -8,20 +8,20 @@ angular.module('starter.controllers', ['ionic'])
     // var newPassword2;
     
     function signin() {
-      $ionicPopup.alert({
-        title: 'Attempted to Log In!',
-        template: "First alert!"
-      });
+      // $ionicPopup.alert({
+      //   title: 'Attempted to Log In!',
+      //   template: "First alert!"
+      // });
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
           $rootScope.$broadcast("authorized");
           $state.go("tab.workout");
           
         }, function(error){
-          // $ionicPopup.alert({
-          //       title: 'Login failed!',
-          //       template: 'Please check Username/Password!'
-          //   });
+           $ionicPopup.alert({
+                 title: 'Login failed!',
+                 template: "error " + error
+             });
           console.log(error);
         });
     }
