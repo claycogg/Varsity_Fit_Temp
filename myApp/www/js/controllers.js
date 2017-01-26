@@ -8,9 +8,10 @@ angular.module('starter.controllers', ['ionic'])
     // var newPassword2;
     
     function signin() {
-       $ionicPopup.alert({
-                title: 'Attempted to Log In!'
-            });
+      $ionicPopup.alert({
+        title: 'Attempted to Log In!',
+        template: "First alert!"
+      });
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
           $rootScope.$broadcast("authorized");
