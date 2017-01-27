@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['ionic'])
         }, function(error){
            $ionicPopup.alert({
                  title: 'Login failed!',
-                 template: "error " + JSON.stringify(error)
+                 template: "error " + JSON.stringify(error) + typeof(error)
              });
           console.log(error);
         });
@@ -518,6 +518,11 @@ angular.module('starter.controllers', ['ionic'])
         getAll();
         
       });
+  }
+  
+  function back(){
+    cancelCreate();
+    $scope.go('tab.workout');
   }
   function initCreateForm() {
     wo.newObject = { name: ''}; 
