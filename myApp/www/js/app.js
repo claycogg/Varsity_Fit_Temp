@@ -28,9 +28,8 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 
  
   var appName = 'varsityfit';
-  //$httpProvider.interceptors.push('httpInterceptor');
 
-  BackandProvider.setAppName('varsityfit'); // change here to your app name
+  BackandProvider.setAppName('varsityfit'); 
 /*
   BackandProvider.setSignUpToken('4ce88904-75c5-412c-8365-df97d9e18a8f'); //token that enable sign up. see http://docs.backand.com/en/latest/apidocs/security/index.html#sign-up
   BackandProvider.setAnonymousToken('85e64ce8-9e56-4543-b071-961ae65a4f28'); // token is for anonymous login. see http://docs.backand.com/en/latest/apidocs/security/index.html#anonymous-access
@@ -38,7 +37,6 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-  
     function httpInterceptor($q, $log, $cookieStore) {
        return {
          request: function(config) {
@@ -48,8 +46,9 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
          }
        };
     }
-*/
 
+  $httpProvider.interceptors.push(httpInterceptor);
+*/
   $stateProvider
   
   .state('login', {
