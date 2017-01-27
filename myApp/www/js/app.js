@@ -26,11 +26,12 @@ angular.module('starter', ['ionic', 'backand', 'starter.controllers', 'starter.s
 
 .config(function(BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
 
-/*  
+ 
   var appName = 'varsityfit';
-  $httpProvider.interceptors.push(httpInterceptor);
-  
+  //$httpProvider.interceptors.push('httpInterceptor');
+
   BackandProvider.setAppName('varsityfit'); // change here to your app name
+/*
   BackandProvider.setSignUpToken('4ce88904-75c5-412c-8365-df97d9e18a8f'); //token that enable sign up. see http://docs.backand.com/en/latest/apidocs/security/index.html#sign-up
   BackandProvider.setAnonymousToken('85e64ce8-9e56-4543-b071-961ae65a4f28'); // token is for anonymous login. see http://docs.backand.com/en/latest/apidocs/security/index.html#anonymous-access
   // Ionic uses AngularUI Router which uses the concept of states
