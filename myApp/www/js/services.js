@@ -282,7 +282,7 @@ angular.module('starter.services', [])
                  template: orange + " name of the app " + JSON.stringify(blue)
       });
             
-            return blue 
+            return blue;
         };
 
         service.signout = function () {

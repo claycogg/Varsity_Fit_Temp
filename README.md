@@ -29,3 +29,5 @@ https://varsity-fit-gillianhyde.c9users.io/#/tab/survey
 
 old id
     "app_id": "e151b247"
+    
+add new paths to index.html

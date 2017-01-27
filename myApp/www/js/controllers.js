@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic'])
 
-.controller('LoginCtrl', function($rootScope, $scope, $state, $ionicPopup, LoginService, Backand) {
+.controller('LoginCtrl', function($rootScope, $scope, $state, $ionicPopup, LoginService, Backand, $http) {
     
     var login = this;
     var token;
@@ -8,23 +8,38 @@ angular.module('starter.controllers', ['ionic'])
     // var newPassword2;
     
     function signin() {
+      console.log("foo");
       // $ionicPopup.alert({
       //   title: 'Attempted to Log In!',
       //   template: "First alert!"
       // });
-      LoginService.signin(login.email, login.password, appName)
-        .then (function() {
-          console.log("attempted to login");
-          $rootScope.$broadcast("authorized");
-          $state.go("tab.workout");
+      // LoginService.signin(login.email, login.password, appName)
+      //   .then (function() {
+      //     console.log("attempted to login");
+      //     $rootScope.$broadcast("authorized");
+      //     $state.go("tab.workout");
           
-        }, function(error){
-           $ionicPopup.alert({
-                 title: 'Login failed!',
-                 template: "error " + JSON.stringify(error) + typeof(error)
-             });
-          console.log(error);
-        });
+      //   }, function(error){
+      //     $ionicPopup.alert({
+      //           title: 'Login failed!',
+      //           template: "error " + JSON.stringify(error) + typeof(error)
+      //       });
+      //     console.log(error);
+      //   });
+      
+        $http.get("https://www.google.com/").then(
+          function(response){
+            $ionicPopup.alert({
+              title: "fetch success"
+            });
+          }
+          ,function(error){
+            $ionicPopup.alert({
+              title: "fetch",
+              template: "error " + JSON.stringify(error)
+            });
+          }
+        );
     }
 
     login.signin = signin;
