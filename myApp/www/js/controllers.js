@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['ionic'])
         }, function(error){
            $ionicPopup.alert({
                  title: 'Login failed!',
-                 template: "error " + error
+                 template: "error " + JSON.stringify(error)
              });
           console.log(error);
         });

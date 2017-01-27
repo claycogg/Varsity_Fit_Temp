@@ -274,12 +274,15 @@ angular.module('starter.services', [])
     .service('LoginService', function (Backand, $http, $ionicPopup) {
         var service = this;
         service.signin = function (email, password, appName) {
+            
+            var orange = Backand.setAppName(appName);
+            var blue = Backand.signin(email, password, appName);
              $ionicPopup.alert({
                  title: 'inside service',
-                 template: appName + " name of the app "
+                 template: orange + " name of the app " + JSON.stringify(blue)
       });
-            Backand.setAppName(appName);
-            return Backand.signin(email, password);
+            
+            return blue 
         };
 
         service.signout = function () {
