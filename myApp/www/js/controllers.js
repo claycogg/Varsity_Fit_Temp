@@ -8,11 +8,7 @@ angular.module('starter.controllers', ['ionic'])
     // var newPassword2;
     
     function signin() {
-      console.log("foo");
-      $ionicPopup.alert({
-        title: 'Attempted to Log In!',
-        template: "First alert!"
-      });
+
       LoginService.signin(login.email, login.password, appName)
         .then (function() {
           console.log("attempted to login");
