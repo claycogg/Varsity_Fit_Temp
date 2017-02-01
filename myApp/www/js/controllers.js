@@ -82,7 +82,6 @@ angular.module('starter.controllers', ['ionic'])
       $scope.currentUser = null;
     }
   };
-  
 
 
 
@@ -438,9 +437,11 @@ angular.module('starter.controllers', ['ionic'])
                 sportDetail.push(sports_temp[object]);
               }
             }
+          
           wo.sports = sportDetail;
+          console.log("broken", JSON.stringify(wo.sports));
           var p = Promise.resolve(wo.sports);
-          p.then(function() {
+          p.then(function(sportDetail) {
           $scope.getWorkoutDetails();
           });
       });
